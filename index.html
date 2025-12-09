@@ -181,21 +181,24 @@
                 title: "FLUIDITÀ PROFONDA",
                 subtitle: "The Water Sleep System",
                 description: "Come la lana merino regola l'umidità, l'acqua regola le emozioni. Immergiti in suoni fluidi per un sonno che scorre senza interruzioni.",
-                playlistUrl: "https://open.spotify.com/playlist/37i9dQZF1DX8ymr6UES7vc",
+                // Link Spotify aggiornato come richiesto dall'utente
+                playlistUrl: "https://open.spotify.com/playlist/6HA89V1mBJpgfrPlhlyB71?si=4_Ps_7c7TueUdRb6dbL4gQ&pi=AuBLM5-pT46Pb",
                 bgClass: "bg-blue-50"
             },
             air: {
                 title: "LEGGEREZZA ETEREA",
                 subtitle: "The Air Sleep System",
                 description: "Puro come il cashmere. Il tuo riposo richiede assenza di peso. Lasciati cullare dal rumore bianco e dal vento per isolare la mente.",
-                playlistUrl: "https://open.spotify.com/playlist/37i9dQZF1DWVet1d0p16a3",
+                // Link Spotify aggiornato in precedenza
+                playlistUrl: "https://open.spotify.com/playlist/0TqWRCMyWX7B5gkkwwKr3l?si=ak37JQOqTBK9aAcq24bd0Q&pi=-WeS-o-1SgO35",
                 bgClass: "bg-gray-50"
             },
             fire: {
                 title: "CALORE AVVOLGENTE",
                 subtitle: "The Fire Sleep System",
                 description: "Un abbraccio caldo come una coperta. Il crepitio del fuoco offre quella sicurezza ancestrale necessaria per abbandonarsi al sonno.",
-                playlistUrl: "https://open.spotify.com/playlist/37i9dQZF1DX7pC196a5d4m",
+                // Link Spotify aggiornato in precedenza
+                playlistUrl: "https://open.spotify.com/playlist/5pDAaESeCyunBWieKO4TzU?si=-ui7JaVZT5OAx6fyMFf57A&pi=5F0gCGtHToyqD",
                 bgClass: "bg-orange-50"
             }
         };
@@ -244,7 +247,20 @@
         }
 
         function showResult() {
-            const winner = Object.keys(scores).reduce((a, b) => scores[a] >= scores[b] ? a : b);
+            // Determina l'elemento vincente in base al punteggio più alto
+            // (in caso di parità, viene scelto il primo elemento con il punteggio più alto)
+            let winner = 'water'; // Inizia con un default
+            let maxScore = scores.water;
+
+            if (scores.air > maxScore) {
+                maxScore = scores.air;
+                winner = 'air';
+            }
+            if (scores.fire > maxScore) {
+                maxScore = scores.fire;
+                winner = 'fire';
+            }
+            
             const data = results[winner];
 
             document.getElementById('quiz-section').classList.add('hidden');
