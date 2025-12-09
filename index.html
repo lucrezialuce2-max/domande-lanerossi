@@ -1,0 +1,273 @@
+import React, { useState } from 'react';
+import { Play, ArrowRight, RefreshCw, Menu, Search, ShoppingBag } from 'lucide-react';
+
+const App = () => {
+  const [step, setStep] = useState('intro');
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [scores, setScores] = useState({ water: 0, air: 0, fire: 0 });
+
+  // Configurazione del Quiz (Stile Lanerossi: Più descrittivo ed elegante)
+  const questions = [
+    {
+      id: 1,
+      text: "L'ambiente ideale per il tuo riposo.",
+      subtext: "Dove la mente trova la sua quiete naturale.",
+      options: [
+        { text: "Il rifugio costiero: pioggia e mare.", type: "water" },
+        { text: "Il calore della casa: legno e fuoco.", type: "fire" },
+        { text: "La purezza dell'aria: vento e silenzio.", type: "air" }
+      ]
+    },
+    {
+      id: 2,
+      text: "Cosa cerca il tuo corpo per rigenerarsi?",
+      subtext: "Ascolta le necessità profonde del tuo sonno.",
+      options: [
+        { text: "Un abbraccio fluido e costante.", type: "water" },
+        { text: "Un tepore avvolgente e sicuro.", type: "fire" },
+        { text: "Freschezza e leggerezza assoluta.", type: "air" }
+      ]
+    },
+    {
+      id: 3,
+      text: "La texture sonora che preferisci.",
+      subtext: "Il suono è un materiale che tocca l'anima.",
+      options: [
+        { text: "Il ritmo dell'acqua che scorre.", type: "water" },
+        { text: "Il crepitio materico della fiamma.", type: "fire" },
+        { text: "Il soffio impalpabile del vento.", type: "air" }
+      ]
+    },
+    {
+      id: 4,
+      text: "La palette cromatica dei tuoi sogni.",
+      subtext: "Colori che cullano la vista prima del buio.",
+      options: [
+        { text: "Blu notte e sfumature oceaniche.", type: "water" },
+        { text: "Toni ambra, terra e calore.", type: "fire" },
+        { text: "Bianco lana, grigio perla, etereo.", type: "air" }
+      ]
+    }
+  ];
+
+  const results = {
+    water: {
+      title: "FLUIDITÀ PROFONDA",
+      subtitle: "The Water Sleep System",
+      description: "Come la lana merino regola l'umidità, l'acqua regola le emozioni. Immergiti in suoni fluidi per un sonno che scorre senza interruzioni.",
+      playlistUrl: "https://open.spotify.com/playlist/37i9dQZF1DX8ymr6UES7vc",
+      bgClass: "bg-blue-50"
+    },
+    air: {
+      title: "LEGGEREZZA ETEREA",
+      subtitle: "The Air Sleep System",
+      description: "Puro come il cashmere. Il tuo riposo richiede assenza di peso. Lasciati cullare dal rumore bianco e dal vento per isolare la mente.",
+      playlistUrl: "https://open.spotify.com/playlist/37i9dQZF1DWVet1d0p16a3",
+      bgClass: "bg-gray-50"
+    },
+    fire: {
+      title: "CALORE AVVOLGENTE",
+      subtitle: "The Fire Sleep System",
+      description: "Un abbraccio caldo come una coperta pesante. Il crepitio del fuoco offre quella sicurezza ancestrale necessaria per abbandonarsi al sonno.",
+      playlistUrl: "https://open.spotify.com/playlist/37i9dQZF1DX7pC196a5d4m",
+      bgClass: "bg-orange-50"
+    }
+  };
+
+  const handleStart = () => setStep('quiz');
+
+  const handleAnswer = (type) => {
+    setScores(prev => ({ ...prev, [type]: prev[type] + 1 }));
+    if (currentQuestion < questions.length - 1) {
+      setCurrentQuestion(prev => prev + 1);
+    } else {
+      setStep('result');
+    }
+  };
+
+  const getWinner = () => Object.keys(scores).reduce((a, b) => scores[a] >= scores[b] ? a : b);
+  const restartQuiz = () => {
+    setScores({ water: 0, air: 0, fire: 0 });
+    setCurrentQuestion(0);
+    setStep('intro');
+  };
+
+  const winner = step === 'result' ? getWinner() : 'water';
+
+  return (
+    <div className="min-h-screen bg-white text-gray-900 font-sans selection:bg-gray-200 selection:text-black flex flex-col">
+      
+      {/* Navbar Minimalista - Ottimizzata Mobile (py-4) */}
+      <nav className="w-full px-6 py-4 md:py-6 flex justify-center items-center border-b border-gray-100 sticky top-0 bg-white/95 backdrop-blur-sm z-50">
+        <div className="flex flex-col items-center cursor-pointer hover:opacity-80 transition-opacity" onClick={restartQuiz}>
+          {/* Logo Immagine - Ridimensionato per mobile e desktop */}
+          <img 
+            src="image_a2e013.png" 
+            alt="Lanerossi Logo" 
+            className="h-8 md:h-10 w-auto"
+          />
+        </div>
+      </nav>
+
+      {/* Main Content - Padding ridotto su mobile (p-4) */}
+      <main className="flex-grow flex flex-col items-center justify-center p-4 md:p-12 max-w-4xl mx-auto w-full relative">
+        
+        {step === 'intro' && (
+          <div className="text-center space-y-6 md:space-y-8 animate-fade-in max-w-2xl px-2">
+            <span className="uppercase tracking-[0.2em] text-[10px] md:text-xs font-semibold text-gray-500">
+              The Sleep System
+            </span>
+            
+            {/* Titolo responsivo: text-4xl su mobile, text-7xl su desktop */}
+            <h1 className="text-4xl md:text-7xl font-serif text-gray-900 leading-tight">
+              WOOL <br/>
+              <span className="font-serif italic font-light text-gray-800">ENERGY</span>
+            </h1>
+            
+            <div className="w-16 h-px bg-gray-300 mx-auto my-6"></div>
+
+            <p className="text-lg md:text-2xl font-serif text-gray-600 leading-relaxed italic px-4">
+              "Il lusso di un sonno che cura e rigenera"
+            </p>
+
+            <p className="text-gray-500 text-sm md:text-base max-w-md mx-auto leading-loose px-2">
+              Scopri la frequenza sonora ideale per il tuo riposo. Un percorso sensoriale attraverso gli elementi naturali.
+            </p>
+
+            <div className="pt-6 md:pt-8">
+              <button 
+                onClick={handleStart}
+                className="group relative inline-flex items-center justify-center px-8 py-4 md:px-10 md:py-4 text-xs md:text-sm uppercase tracking-widest text-white transition-all duration-300 bg-black hover:bg-gray-800 w-full md:w-auto"
+              >
+                Inizia il percorso
+                <ArrowRight className="ml-3 w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+              </button>
+            </div>
+          </div>
+        )}
+
+        {step === 'quiz' && (
+          <div className="w-full max-w-xl space-y-8 md:space-y-12 animate-fade-in-up text-center px-2">
+            {/* Progress Bar Minimal */}
+            <div className="w-full flex justify-between items-end border-b border-gray-200 pb-2 mb-8 md:mb-12">
+              <span className="text-[10px] md:text-xs uppercase tracking-widest text-gray-400">Step 0{currentQuestion + 1}</span>
+              <span className="text-[10px] md:text-xs uppercase tracking-widest text-gray-400">04</span>
+            </div>
+
+            <div className="space-y-3 md:space-y-4">
+              <h2 className="text-2xl md:text-4xl font-serif text-gray-900 leading-tight">
+                {questions[currentQuestion].text}
+              </h2>
+              <p className="text-gray-500 italic font-serif text-base md:text-lg">
+                {questions[currentQuestion].subtext}
+              </p>
+            </div>
+
+            <div className="space-y-3 md:space-y-4 pt-4 md:pt-8">
+              {questions[currentQuestion].options.map((option, index) => (
+                <button
+                  key={index}
+                  onClick={() => handleAnswer(option.type)}
+                  className="w-full py-5 px-6 md:py-6 md:px-8 border border-gray-200 hover:border-black transition-all duration-300 group bg-transparent hover:bg-gray-50 text-left flex justify-between items-start active:bg-gray-100"
+                >
+                  <span className="font-sans text-xs md:text-sm tracking-wide uppercase text-gray-600 group-hover:text-black transition-colors pr-4 flex-1 break-words">
+                    {option.text}
+                  </span>
+                  <div className="w-2 h-2 rounded-full bg-gray-200 group-hover:bg-black transition-colors shrink-0 mt-1"></div>
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {step === 'result' && (
+          <div className="w-full animate-fade-in flex flex-col md:flex-row shadow-2xl shadow-gray-200/50 overflow-hidden bg-white max-w-5xl mx-auto min-h-0 md:min-h-[500px]">
+            
+            {/* Image/Color Section */}
+            <div className={`w-full md:w-1/2 ${results[winner].bgClass} px-6 py-8 md:p-12 flex flex-col justify-between relative overflow-hidden min-h-[300px] md:min-h-auto`}>
+              <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
+                 <div className="w-full h-full border-[20px] border-white/20"></div>
+              </div>
+              
+              <div className="relative z-10 w-full">
+                <span className="uppercase tracking-[0.3em] text-[10px] md:text-xs font-bold text-gray-500 mb-3 md:mb-4 block">
+                  Il tuo risultato
+                </span>
+                {/* Font ridimensionato per stare dentro il box: text-2xl su mobile fino a text-5xl su desktop */}
+                <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif text-gray-900 leading-none mb-4 md:mb-6 pr-2">
+                  {results[winner].title}
+                </h2>
+                <div className="w-12 h-1 bg-black mb-4 md:mb-6"></div>
+              </div>
+
+              <div className="relative z-10 mt-auto">
+                 <p className="text-gray-600 font-serif italic text-base md:text-lg leading-relaxed">
+                   {results[winner].subtitle}
+                 </p>
+              </div>
+            </div>
+
+            {/* Content/Action Section - Padding ridotto su mobile */}
+            <div className="w-full md:w-1/2 p-8 md:p-12 bg-white flex flex-col justify-center space-y-6 md:space-y-8">
+              
+              <p className="text-gray-600 leading-loose font-light text-sm md:text-base">
+                {results[winner].description}
+              </p>
+
+              <div className="pt-2 md:pt-4 space-y-3 md:space-y-4">
+                <a 
+                  href={results[winner].playlistUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full py-4 bg-black text-white text-xs md:text-sm uppercase tracking-widest hover:bg-gray-800 transition-colors flex items-center justify-center gap-3"
+                >
+                  <Play size={16} fill="white" />
+                  Ascolta su Spotify
+                </a>
+                
+                <button 
+                  onClick={restartQuiz}
+                  className="w-full py-4 border border-gray-200 text-gray-500 text-[10px] md:text-xs uppercase tracking-widest hover:border-gray-900 hover:text-black transition-all flex items-center justify-center gap-2"
+                >
+                  <RefreshCw size={14} />
+                  Ricomincia
+                </button>
+              </div>
+            </div>
+
+          </div>
+        )}
+
+      </main>
+
+      {/* Footer Minimal */}
+      <footer className="w-full py-6 md:py-8 text-center text-gray-400 text-[10px] md:text-xs tracking-widest uppercase border-t border-gray-100">
+        © Lanerossi Sleep System 2025
+      </footer>
+      
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;700&display=swap');
+        
+        .font-serif {
+          font-family: 'Playfair Display', serif;
+        }
+        .font-sans {
+          font-family: 'Lato', sans-serif;
+        }
+
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(20px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+          animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        .animate-fade-in-up {
+          animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+      `}</style>
+    </div>
+  );
+};
+
+export default App;
