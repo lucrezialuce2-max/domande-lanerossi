@@ -60,12 +60,13 @@
             <div class="w-16 h-px bg-gray-300 mx-auto my-6"></div>
 
             <p class="text-lg md:text-2xl font-serif text-gray-600 leading-relaxed italic px-4">
-                "Quattro elementi. Cinque sensi.
+                "Quattro elementi. Cinque sensi. <br>
                 Un unico ecosistema per il tuo sonno."
             </p>
 
             <p class="text-gray-500 text-sm md:text-base max-w-md mx-auto leading-loose px-2">
-                Scopri la frequenza sonora ideale per il tuo riposo. Un percorso sensoriale attraverso gli elementi naturali.
+                Scopri la frequenza sonora ideale per il tuo riposo. <br>
+                Un percorso sensoriale attraverso gli elementi naturali.
             </p>
 
             <div class="pt-6 md:pt-8">
@@ -161,39 +162,38 @@
         const questions = [
             {
                 text: "L'ambiente ideale per il tuo riposo.",
-                subtext: "Dove la mente trova la sua quiete naturale.",
-                options: [
-                    { text: "Il rifugio costiero: pioggia e mare.", type: "water" },
-                    { text: "Il calore della casa: legno e fuoco.", type: "fire" },
-                    { text: "La purezza dell'aria: vento e silenzio.", type: "air" }
-                ]
-            },
-            {
-                text: "Cosa cerca il tuo corpo per rigenerarsi?",
-                subtext: "Ascolta le necessità profonde del tuo sonno.",
-                options: [
-                    { text: "Un abbraccio fluido e costante.", type: "water" },
-                    { text: "Un tepore avvolgente e sicuro.", type: "fire" },
-                    { text: "Freschezza e leggerezza assoluta.", type: "air" }
-                ]
-            },
-            {
-                text: "La texture sonora che preferisci.",
-                subtext: "Il suono è un materiale che tocca l'anima.",
-                options: [
-                    { text: "Il ritmo dell'acqua che scorre.", type: "water" },
-                    { text: "Il crepitio materico della fiamma.", type: "fire" },
-                    { text: "Il soffio impalpabile del vento.", type: "air" }
-                ]
-            },
-            {
-                text: "La palette cromatica dei tuoi sogni.",
-                subtext: "Colori che cullano la vista prima del buio.",
-                options: [
-                    { text: "Blu notte e sfumature oceaniche.", type: "water" },
-                    { text: "Toni ambra, terra e calore.", type: "fire" },
-                    { text: "Bianco lana, grigio perla, etereo.", type: "air" }
-                ]
+        subtext: "Dove la mente trova la sua quiete naturale.",
+        options: [
+            { text: "Il rifugio costiero: il respiro del mare.", type: "water" }, // Più evocativo di "pioggia"
+            { text: "Il cuore della casa: profumo di legna e fuoco.", type: "fire" }, // Aggiunto "profumo" per sensorialità
+            { text: "La purezza dell'aria: cielo aperto e silenzio.", type: "air" } // "Cielo aperto" dà più spazialità del vento
+        ]
+    },
+    {
+        text: "Cosa cerca il tuo corpo per rigenerarsi?",
+        subtext: "Ascolta le necessità profonde del tuo sonno.",
+        options: [
+            { text: "La sensazione di galleggiare senza peso.", type: "water" }, // Risolve il problema del testo precedente
+            { text: "Un tepore avvolgente e sicuro.", type: "fire" },
+            { text: "Freschezza e leggerezza assoluta.", type: "air" }
+        ]
+    },
+    {
+        text: "La texture sonora che preferisci.",
+        subtext: "Il suono è un materiale che tocca l'anima.",
+        options: [
+            { text: "Il ritmo ipnotico dell'acqua che scorre.", type: "water" }, // Qui "ritmo" sta benissimo
+            { text: "Il crepitio caldo della fiamma.", type: "fire" }, // "Caldo" è più immediato di "materico"
+            { text: "Il soffio impalpabile del vento.", type: "air" }
+        ]
+    },
+    {
+        text: "La palette cromatica dei tuoi sogni.",
+        subtext: "Colori che cullano la vista prima del buio.",
+        options: [
+            { text: "Blu abisso e sfumature oceaniche.", type: "water" }, // "Abisso" è più profondo di "notte"
+            { text: "Toni ambra, terracotta e bronzo.", type: "fire" }, // Sostituito "calore" con colori veri
+            { text: "Bianco nuvola, grigio perla, etereo.", type: "air" } // Sostituito "lana" (caldo) con "nuvola" (aereo)
             }
         ];
 
